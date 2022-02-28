@@ -24,18 +24,21 @@ export class AlbumService {
     ]);
     return album;
   }
+
   async getAll(count = 10, offset = 0): Promise<Album[]> {
     const [albums] = await Promise.all([
       this.albumModel.find().skip(offset).limit(count),
     ]);
     return albums;
   }
+
   async getOne(id: ObjectId): Promise<Album> {
     const [album] = await Promise.all([
       this.albumModel.findById(id).populate('tracks'),
     ]);
     return album;
   }
+
   async delete(id: ObjectId): Promise<ObjectId> {
     const album = await this.albumModel.findByIdAndDelete(id);
 
@@ -63,7 +66,6 @@ export class AlbumService {
         ],
       }),
     ]);
-
     return albums;
   }
 }
